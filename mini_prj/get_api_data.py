@@ -14,7 +14,7 @@ DB_CONFIG = {
     'user': os.getenv('DB_USER'),
     'password': os.getenv('DB_PASSWORD')
 }
-DB_NAME = "bike_db"
+DB_NAME = "bike_db"   # 따로 빼놓은 이유: 데이터 베이스 생성 시 충돌 일어나서
 
 # DB 연결
 conn = mc.connect(**DB_CONFIG)
@@ -32,6 +32,8 @@ cursor.execute(f"USE {DB_NAME}")
 # parkingBikeTotCnt  현재 자전거 수
 # shared  이용률
 # checkTime  수집 시간
+# stationLatitude 위도
+# stationLongitude 경도
 
 # 테이블 생성 
 cursor.execute('''
@@ -47,7 +49,7 @@ CREATE TABLE IF NOT EXISTS bike_data(
     checkTime DATETIME comment '수집시간',
     UNIQUE KEY unique_data (stationId, checkTime)             
 ) charset=utf8mb4
-''')
+''')    # 기본값이라 안해도 되지만 혹시 몰라서 명시
 
 # api 호출
 url = f"http://openapi.seoul.go.kr:8088/{API_KEY}/json/bikeList/1/1000"
@@ -55,7 +57,7 @@ url = f"http://openapi.seoul.go.kr:8088/{API_KEY}/json/bikeList/1/1000"
 response = requests.get(url)
 data = response.json()
 
-rows = data.get('rentBikeStatus', {}).get('row', [])
+rows = data.get('rentBikeStatus', {}).get('row', [])   # rentBikeStatus : 데이터 이름
 
 print(f"데이터 개수: {len(rows)}")
 
