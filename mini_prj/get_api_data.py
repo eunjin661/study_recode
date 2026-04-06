@@ -20,7 +20,7 @@ DB_NAME = "bike_db"   # 따로 빼놓은 이유: 데이터 베이스 생성 시 
 conn = mc.connect(**DB_CONFIG)
 cursor = conn.cursor()
 
-print("DB 서버 연결:", conn.is_connected())
+print("DB server connnect:", conn.is_connected())
 
 # 데이터베이스 생성
 cursor.execute(f"CREATE DATABASE IF NOT EXISTS {DB_NAME}")
@@ -59,11 +59,11 @@ data = response.json()
 
 rows = data.get('rentBikeStatus', {}).get('row', [])   # rentBikeStatus : 데이터 이름
 
-print(f"데이터 개수: {len(rows)}")
+print(f"data counts: {len(rows)}")
 
 # 데이터 가공
 data_list = []
-
+time = datetime.now()
 for row in rows:
     try:
         data_list.append((
@@ -74,7 +74,7 @@ for row in rows:
             float(row.get('shared')),
             float(row.get('stationLatitude')),
             float(row.get('stationLongitude')),
-            datetime.now()
+            time
         ))
     except:
         continue
@@ -93,7 +93,7 @@ VALUES (%s,%s,%s,%s,%s,%s,%s,%s)
 cursor.executemany(insert_query, data_list)
 conn.commit()
 
-print(f"{len(data_list)}건 저장 완료!")
+print(f"{len(data_list)} save completed!")
 
 # 종료
 cursor.close()
