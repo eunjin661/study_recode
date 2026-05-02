@@ -1,0 +1,22 @@
+{
+  "model": "MLP + Embedding (Classifier)",
+  "target": "tdi_label",
+  "feature_set": "T0",
+  "n_train": 24474,
+  "n_val": 5245,
+  "n_test": 5245,
+  "best_epoch": 22,
+  "test_AUC": 0.796,
+  "test_Acc": 0.7188,
+  "test_F1": 0.6302,
+  "test_Recall": 0.7368,
+  "test_Precision": 0.5506,
+  "cat_auc": {
+    "Education": 0.5919,
+    "Entertainment": 0.7788,
+    "Lifestyle": 0.764,
+    "Music": 0.8524,
+    "News": 0.9762
+  },
+  "goal_met": true
+}
