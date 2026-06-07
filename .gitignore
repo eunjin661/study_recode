@@ -9,3 +9,5 @@ Mushroom
 t5_sentiment_results
 t5_lora_results
 chroma_lesson_01_v3
+.pt
+.json
